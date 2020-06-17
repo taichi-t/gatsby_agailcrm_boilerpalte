@@ -25,12 +25,12 @@ const fetchUrl = async (state, url, apiKey, userName) => {
     headers: {
       "Content-Type": "application/json",
       Authorization:
-        "Basic " + new Buffer(userName + ":" + apiKey).toString("base64"),
+        "Basic " + Buffer.from(userName + ":" + apiKey).toString("base64"),
     },
     body: JSON.stringify(data), // body data type must match "Content-Type" header
   })
 
-  const json = await response.json().then(console.log(response.status))
+  const json = await response.json()
   console.log(json)
 }
 
@@ -42,8 +42,8 @@ export const Form = () => {
   const userName = process.env.GATSBY_USERNAME
 
   const handleSubmit = e => {
-    fetchUrl(state, url, apiKey, userName)
     e.preventDefault()
+    fetchUrl(state, url, apiKey, userName)
   }
 
   return (
