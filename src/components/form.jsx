@@ -37,9 +37,9 @@ const fetchUrl = async (state, url, apiKey, userName) => {
 export const Form = () => {
   const { state, handleChange } = useForm()
 
-  const url = `https://ciccctext.agilecrm.com/dev/api/contacts`
+  const url = process.env.GATSBY_URL
   const apiKey = process.env.GATSBY_API_KEY
-  const userName = "info@nebagiba.com"
+  const userName = process.env.GATSBY_USERNAME
 
   const handleSubmit = e => {
     fetchUrl(state, url, apiKey, userName)
