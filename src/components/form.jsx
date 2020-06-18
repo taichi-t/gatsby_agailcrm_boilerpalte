@@ -1,38 +1,38 @@
 import React from "react"
 import { useForm } from "../hooks/useForm"
 
-const fetchUrl = async (state, url, apiKey, userName) => {
-  const data = {
-    properties: [
-      {
-        type: "SYSTEM",
-        name: "first_name",
-        value: state.first_name,
-      },
-      {
-        type: "SYSTEM",
-        name: "first_name",
-        value: state.first_name,
-      },
-    ],
-  }
+// const fetchUrl = async (state, url, apiKey, userName) => {
+//   const data = {
+//     properties: [
+//       {
+//         type: "SYSTEM",
+//         name: "first_name",
+//         value: state.first_name,
+//       },
+//       {
+//         type: "SYSTEM",
+//         name: "first_name",
+//         value: state.first_name,
+//       },
+//     ],
+//   }
 
-  const response = await fetch(url, {
-    method: "POST", // *GET, POST, PUT, DELETE, etc.
-    mode: "no-cors", // no-cors, cors, *same-origin
-    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-    credentials: "omit", // include, *same-origin, omit
-    headers: {
-      "Content-Type": "application/json",
-      Authorization:
-        "Basic " + Buffer.from(userName + ":" + apiKey).toString("base64"),
-    },
-    body: JSON.stringify(data), // body data type must match "Content-Type" header
-  })
+//   const response = await fetch(url, {
+//     method: "POST", // *GET, POST, PUT, DELETE, etc.
+//     mode: "no-cors", // no-cors, cors, *same-origin
+//     cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+//     credentials: "omit", // include, *same-origin, omit
+//     headers: {
+//       "Content-Type": "application/json",
+//       Authorization:
+//         "Basic " + Buffer.from(userName + ":" + apiKey).toString("base64"),
+//     },
+//     body: JSON.stringify(data), // body data type must match "Content-Type" header
+//   })
 
-  const json = await response.json()
-  console.log(json)
-}
+//   const json = await response.json()
+//   console.log(json)
+// }
 
 export const Form = () => {
   const { state, handleChange } = useForm()
@@ -43,7 +43,10 @@ export const Form = () => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    fetchUrl(state, url, apiKey, userName)
+    // fetchUrl(state, url, apiKey, userName)
+    fetch("/.netlify/functions/hello")
+      .then(response => response.json())
+      .then(console.log)
   }
 
   return (
