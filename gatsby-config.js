@@ -7,7 +7,7 @@ module.exports = {
       createProxyMiddleware({
         target: "http://localhost:9000",
         pathRewrite: {
-          "/.netlify/functions/": "",
+          "/.netlify/cloudFunctions/": "",
         },
       })
     )

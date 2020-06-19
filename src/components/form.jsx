@@ -1,5 +1,6 @@
 import React from "react"
 import { useForm } from "../hooks/useForm"
+import postRequest from "../lib/postRequest"
 
 // const fetchUrl = async (state, url, apiKey, userName) => {
 //   const data = {
@@ -37,16 +38,29 @@ import { useForm } from "../hooks/useForm"
 export const Form = () => {
   const { state, handleChange } = useForm()
 
-  const url = process.env.GATSBY_URL
-  const apiKey = process.env.GATSBY_API_KEY
-  const userName = process.env.GATSBY_USERNAME
+  const data = {
+    properties: [
+      {
+        type: "SYSTEM",
+        name: "first_name",
+        value: state.first_name,
+      },
+      {
+        type: "SYSTEM",
+        name: "first_name",
+        value: state.first_name,
+      },
+    ],
+  }
+
+  // const url = process.env.GATSBY_URL
+  // const apiKey = process.env.GATSBY_API_KEY
+  // const userName = process.env.GATSBY_USERNAME
 
   const handleSubmit = e => {
     e.preventDefault()
+    postRequest("/.netlify/functions/post", data)
     // fetchUrl(state, url, apiKey, userName)
-    fetch("/.netlify/functions/hello")
-      .then(response => response.json())
-      .then(console.log)
   }
 
   return (
