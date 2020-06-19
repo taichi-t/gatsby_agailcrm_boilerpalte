@@ -2,39 +2,6 @@ import React from "react"
 import { useForm } from "../hooks/useForm"
 import postRequest from "../lib/postRequest"
 
-// const fetchUrl = async (state, url, apiKey, userName) => {
-//   const data = {
-//     properties: [
-//       {
-//         type: "SYSTEM",
-//         name: "first_name",
-//         value: state.first_name,
-//       },
-//       {
-//         type: "SYSTEM",
-//         name: "first_name",
-//         value: state.first_name,
-//       },
-//     ],
-//   }
-
-//   const response = await fetch(url, {
-//     method: "POST", // *GET, POST, PUT, DELETE, etc.
-//     mode: "no-cors", // no-cors, cors, *same-origin
-//     cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-//     credentials: "omit", // include, *same-origin, omit
-//     headers: {
-//       "Content-Type": "application/json",
-//       Authorization:
-//         "Basic " + Buffer.from(userName + ":" + apiKey).toString("base64"),
-//     },
-//     body: JSON.stringify(data), // body data type must match "Content-Type" header
-//   })
-
-//   const json = await response.json()
-//   console.log(json)
-// }
-
 export const Form = () => {
   const { state, handleChange } = useForm()
 
@@ -47,20 +14,17 @@ export const Form = () => {
       },
       {
         type: "SYSTEM",
-        name: "first_name",
-        value: state.first_name,
+        name: "last_name",
+        value: state.last_name,
       },
     ],
   }
 
-  // const url = process.env.GATSBY_URL
-  // const apiKey = process.env.GATSBY_API_KEY
-  // const userName = process.env.GATSBY_USERNAME
-
   const handleSubmit = e => {
     e.preventDefault()
-    postRequest("/.netlify/functions/post", data)
-    // fetchUrl(state, url, apiKey, userName)
+    postRequest("/.netlify/functions/post", data).then(res => {
+      console.log(res)
+    })
   }
 
   return (

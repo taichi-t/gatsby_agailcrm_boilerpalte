@@ -1,5 +1,5 @@
 const postRequest = async (url, data) => {
-  await fetch(url, {
+  const res = await fetch(url, {
     method: "POST",
     headers: new Headers({
       "Content-type": "application/json",
@@ -7,8 +7,13 @@ const postRequest = async (url, data) => {
     body: JSON.stringify(data), // body data type must match "Content-Type" header
     credentials: "include",
   })
-    .then(response => response.json())
-    .then(json => console.log(json))
+    .then(res => res.json())
+    .then(json => json)
+    .catch(err => {
+      return { success: false }
+    })
+
+  return res
 }
 
 export default postRequest
