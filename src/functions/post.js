@@ -1,10 +1,11 @@
 const axios = require("axios")
-var Base64 = require("js-base64").Base64
+require("dotenv").config()
+let Base64 = require("js-base64").Base64
 
 // For more info, check https://www.netlify.com/docs/functions/#javascript-lambda-functions
 export function handler(event, context, callback) {
   axios
-    .post(URL, event.body, {
+    .post(process.env.GATSBY_URL, event.body, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Basic ${Base64.encode(
@@ -20,15 +21,4 @@ export function handler(event, context, callback) {
       statusCode: 400,
       body: e,
     }))
-  // .callback(null, {
-  //   // return null to show no errors
-  //   statusCode: 200, // http status code
-  //   body: JSON.stringify({
-  //     msg: "Hello, World! " + Math.round(Math.random() * 10),
-  //   }),
-  // })
 }
-
-// Authorization: `Basic ${btoa(
-//   process.env.GATSBY_USERNAME + ":" + process.env.GATSBY_API_KEY
-// )}`,
