@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from "gatsby"
+import { BlogList } from "../components/blogList"
 
 import Layout from "../components/layout"
 import Form from "../components/form"
@@ -11,8 +12,9 @@ const IndexPage = () => {
     <Layout>
       <SEO title="Home" />
       <Link to="/page-2/">Go to page 2</Link> <br />
-      <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
+      <Link to="/blog/">Go to blog pages</Link> <br />
       <Form />
+      <BlogList />
     </Layout>
   )
 }
